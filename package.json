@@ -1,0 +1,14 @@
+{
+  "name": "parse-ember-model",
+  "version": "0.0.1",
+  "description": "Parse REST adapter for Ember Model",
+  "scripts": {
+  },
+  "repository": "https://github.com/robharper/parse-ember-model",
+  "author": "Rob Harper",
+  "license": "BSD",
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-connect": "~0.3.0"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "name": "parse-ember-model",
+  "version": "0.0.1",
+  "main": "src/ember-parse-adapter.js",
+  "dependencies": {
+    "ember": "~1.0.0-rc.5",
+    "ember-model": "git://github.com/ebryn/ember-model.git#~0.0.7",
+    "jquery": "~1.9.1"
+  }
+}
