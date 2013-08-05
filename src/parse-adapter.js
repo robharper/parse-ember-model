@@ -1,20 +1,15 @@
-(function(){
+/**
+ * Ember Model ParseAdapter
+ *
+ * To use, create an adapter setting your app's values for applicationId and restAPIKey and set
+ * as the `adapter` for all models in your application. All models must also have the `className`
+ * class variable set that provides the Parse className
+ *
+ */
+;(function(){
 
   var get = Ember.get;
 
-  // Use objectId for primary key in all Parse models:
-  // Ember.Model.reopenClass({
-  //   primaryKey: 'objectId'
-  // });
-
-  /**
-   * Ember Model ParseAdapter
-   *
-   * To use, create an adapter setting your app's values for applicationId and restAPIKey and set
-   * as the `adapter` for all models in your application. All models must also have the `className`
-   * class variable set that provides the Parse className
-   *
-   */
   Ember.ParseAdapter = Ember.RESTAdapter.extend({
 
     // Your app's applicaiton ID
