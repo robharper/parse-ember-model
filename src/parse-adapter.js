@@ -18,28 +18,37 @@
     // Your app's REST API Key
     restAPIKey: null,
 
-    // API endpoint
-    apiUrl: 'https://api.parse.com/',
+    // API root, no version
+    apiRoot: 'https://api.parse.com',
 
     // API version
     version: 1,
 
+    // API endpoint url
+    apiUrl: function() {
+      return get(this,'apiRoot') + '/' + get(this, 'version');
+    }.property('apiRoot', 'version'),
+
+    // Overrides RESTAdapters's buildURL to form the url from the className
+    // Returns a path that will be joined to the API root later
     buildURL: function(klass, id) {
-      var urlRoot = get(this,'apiUrl') + get(this, 'version') + '/classes/';
-      var className = get(klass, 'className');
-      if (!className) { throw new Error('Ember.ParseAdapter requires a `className` property to be specified'); }
-      urlRoot += className;
+      var url = get(klass, 'url');
+      if (!url) {
+        var className = get(klass, 'className');
+        if (!className) { throw new Error('Ember.ParseAdapter requires either a `url` or a `className` property to be specified'); }
+        url = '/classes/' + get(klass, 'className');
+      }
 
       if (id) {
-        return urlRoot + "/" + id;
+        return url + "/" + id;
       } else {
-        return urlRoot;
+        return url;
       }
     },
     
     ajaxSettings: function(url, method) {
       return {
-        url: url,
+        url: get(this,'apiUrl') + url,
         type: method,
         dataType: "json",
         headers: {
