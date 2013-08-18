@@ -56,6 +56,15 @@
           'X-Parse-REST-API-Key': get(this, 'restAPIKey')
         }
       };
+    },
+
+    didCreateRecord: function(record, data) {
+      // Parse returns only objectId and createdAt, merge this over existing data since `load`
+      // replaces all object contents with the data provided
+      var primaryKey = get(record.constructor, 'primaryKey');
+      var dataToLoad = Ember.merge(record.toJSON(), data);
+      record.load(dataToLoad[primaryKey], dataToLoad);
+      record.didCreateRecord();
     }
   });
 
