@@ -3,6 +3,19 @@ module.exports = function(grunt) {
   // Project configuration.
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
+
+    concat: {
+      full: {
+        dest: 'dist/parse-ember-model.js',
+        src: [
+          'src/parse-adapter.js', 
+          'src/parse-model.js',
+          'src/parse-user.js',
+          'src/parse-pointer-attr.js'
+        ]
+      }
+    },
+
     connect: {
       server: {
         options: {
@@ -21,6 +34,7 @@ module.exports = function(grunt) {
   });
 
   // Load the plugin that provides the "uglify" task.
+  grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-connect');
 
   // Default task(s).
