@@ -6,17 +6,23 @@
  * class variable set that provides the Parse className
  *
  */
-;(function(){
+;(function(ns){
 
   var get = Ember.get;
 
-  Ember.ParseAdapter = Ember.RESTAdapter.extend({
+  ns.ParseAdapter = Ember.RESTAdapter.extend({
 
     // Your app's applicaiton ID
     applicationId: null,
     
     // Your app's REST API Key
     restAPIKey: null,
+
+    // Current user's session token, if applicable. Only used if set
+    sessionToken: null,
+
+    // Parse master key. Only used if set
+    masterKey: null,
 
     // API root, no version
     apiRoot: 'https://api.parse.com',
@@ -47,7 +53,7 @@
     },
     
     ajaxSettings: function(url, method) {
-      return {
+      var settings = {
         url: get(this,'apiUrl') + url,
         type: method,
         dataType: "json",
@@ -56,6 +62,13 @@
           'X-Parse-REST-API-Key': get(this, 'restAPIKey')
         }
       };
+      if (get(this, 'sessionToken')) {
+        settings.headers['X-Parse-Session-Token'] = get(this, 'sessionToken');
+      }
+      if (get(this, 'masterKey')) {
+        settings.headers['X-Parse-Master-Key'] = get(this, 'masterKey');
+      }
+      return settings;
     },
 
     didCreateRecord: function(record, data) {
@@ -69,4 +82,4 @@
   });
 
 
-}());
+}(Ember.Parse = Ember.Parse || {}));
