@@ -17,7 +17,7 @@ To Do:
 
 ### Usage
 
-```
+```javascript
 // Setup
 var parseAdapter = Ember.ParseAdapter.create({
   applicationId: 'yourAppId',
