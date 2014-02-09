@@ -20,6 +20,7 @@ module.exports = function(grunt) {
       server: {
         options: {
           port: 9000,
+          keepalive: true,
           middleware: function(connect, options) {
             return [
               // Serve static files.
