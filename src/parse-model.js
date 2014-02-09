@@ -7,7 +7,8 @@
   });
 
   Model.reopenClass({
-    primaryKey: 'objectId'
+    primaryKey: 'objectId',
+    collectionKey: 'results'
   });
 
   ns.Model = Model;
