@@ -1,0 +1,79 @@
+<!html>
+<html>
+  <head>
+    <script type="text/javascript" src="jquery/jquery.js"></script>
+    <script type="text/javascript" src="handlebars/handlebars.js"></script>
+    <script type="text/javascript" src="ember/ember.js"></script>
+    <script type="text/javascript" src="ember-model/ember-model.js"></script>
+
+    <script type="text/javascript" src="parse-adapter.js"></script>
+    <!--script type="text/javascript" src="belongs-to.js"></script-->
+    <script type="text/javascript" src="parse-model.js"></script>
+    <script type="text/javascript" src="parse-user.js"></script>
+    <script type="text/javascript" src="parse-pointer-attr.js"></script>
+
+    <script>
+      var attr = Ember.attr, hasMany = Ember.hasMany;
+
+      App = Ember.Application.create();
+
+      parse = Ember.Parse.ParseAdapter.create({
+        applicationId: 'e8hop7G8jD5j6bbUPkiXe8ZXRoAuWAuwWIHNNnMf',
+        restAPIKey: '5rXQBWlNLnIzBrs54D9vxUAI8lzWBTQxgOrBKOP8'
+      });
+      Ember.Parse.Model.reopenClass({
+        adapter: parse
+      });
+
+      Ember.Parse.User.adapter = parse;
+    
+
+      App.Tag = Ember.Parse.Model.extend({
+        title: attr()
+      });
+      App.Tag.className = "tags";
+
+
+      App.Post = Ember.Parse.Model.extend({
+        name: attr(),
+        tag: Ember.Parse.attrPointer("App.Tag")
+      });
+
+      App.Post.className = "posts";
+
+
+      App.Comment = Ember.Parse.Model.extend({
+        text: attr()
+      });
+
+      App.Comment.className = "comments";
+
+
+      // Run once to create user:
+      // user = App.User.create({username: 'me', password:'testing'});
+      // user.save();
+
+      var post, comment, tag;
+
+      var canLogin = Ember.Parse.User.login('me','testing');
+      canLogin.then(function(user) {
+        tag = App.Tag.create({title: 'hello'});
+        tag.save().then( function() {
+          post = App.Post.create({name: 'Post 1'});
+          post.set('tag', tag);
+          post.save().then(function() {
+            comment = App.Comment.create({text: 'This is a comment for post 1', post: post})
+            comment.save().then( function() {
+              // post.get('comments').addObject(comment);
+              post.set('name', 'monkey');
+              post.save();
+            });        
+          });
+        });
+      });
+
+    </script>
+  </head>
+  <body>
+  </body>
+</html>

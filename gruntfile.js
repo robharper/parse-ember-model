@@ -8,7 +8,7 @@ module.exports = function(grunt) {
       full: {
         dest: 'dist/parse-ember-model.js',
         src: [
-          'src/parse-adapter.js', 
+          'src/parse-adapter.js',
           'src/parse-model.js',
           'src/parse-user.js',
           'src/parse-pointer-attr.js'
@@ -26,6 +26,7 @@ module.exports = function(grunt) {
               // Serve static files.
               connect.static('src'),
               connect.static('test'),
+              connect.static('examples'),
               connect.static('bower_components')
             ];
           }
