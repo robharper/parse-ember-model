@@ -1,6 +1,6 @@
 # Parse Ember Model Adapter
 
-A simple extension to the [Ember Model](https://github.com/ebryn/ember-model) [`RESTAdapter`](https://github.com/ebryn/ember-model/blob/master/packages/ember-model/lib/rest_adapter.js) to support the [Parse REST API](https://www.parse.com/docs/rest).
+An example implementation of a simple extension to the [Ember Model](https://github.com/ebryn/ember-model) [`RESTAdapter`](https://github.com/ebryn/ember-model/blob/master/packages/ember-model/lib/rest_adapter.js) to support the [Parse REST API](https://www.parse.com/docs/rest).
 
 Supports:
 
@@ -9,11 +9,16 @@ Supports:
  * `belongsTo` relationships via Parse object pointers (with included patch)
  * Other relationships via stored string ids
 
-To Do:
+Not yet supported:
 
  * Support for non-embedded `hasMany`
  * `findMany` support
  * Sideloading and embedding
+
+Caveats:
+
+ * The purpose of this repo is to show that integrating Ember Model and Parse is fairly easy for basic usage. **I don't maintain this project** since I've found that integration of Parse with Ember Data is doable and probably a better option.
+ * Last tested and working with an *old* verison of Ember Model, things may have changed. The `belongsTo` patch monkeypatches the Ember Model source so is very fragile.
 
 ### Usage
 
