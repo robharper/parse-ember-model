@@ -7,7 +7,9 @@
   });
 
   Model.reopenClass({
+    // Parse uses objectId for all key refs
     primaryKey: 'objectId',
+    // Collections returned as a hash with results array under key "results"
     collectionKey: 'results'
   });
 
